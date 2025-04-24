@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-3vjxfpp*@_mjcl7_u1d^8sy0^&3!cr!+(_cp2qhrzc9gtlhu^s
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
-
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,10 +41,10 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_filters",
     'drf_yasg',
-    'users',
-    'clients',
-    'enrollments',
-    'health_programs',
+    'apps.users',
+    'apps.clients',
+    'apps.enrollments',
+    'apps.health_programs',
     
 ]
 
@@ -148,6 +146,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header using the Bearer scheme. Example: "Bearer <your_token>"'
+        }
+    },
+    'USE_SESSION_AUTH': False, 
+}
 
 
 # Database
