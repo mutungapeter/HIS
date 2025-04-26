@@ -1,2 +1,23 @@
-/env
+# Environment variables
 .env
+
+#Virtualenv
+/env
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django database
+db.sqlite3
+
+# Django migrations cache
+**/migrations/__pycache__/
+
+
+
+# IDE config files
+.vscode/
+.idea/
