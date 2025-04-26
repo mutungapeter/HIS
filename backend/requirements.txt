@@ -8,6 +8,7 @@ pillow==11.0.0
 requests==2.32.3
 pytest-django==4.9.0
 python-dotenv==1.1.0
+waitress==3.0.2
 gunicorn==23.0.0
 
 
