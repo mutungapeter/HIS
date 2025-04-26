@@ -1,0 +1,157 @@
+/* DatePicker Container */
+.datepickerWrapper :global(.react-datepicker-wrapper) {
+  width: 100%;
+  height: auto !important;
+}
+
+/* Input container positioning */
+.datepickerWrapper :global(.react-datepicker__input-container) {
+  width: 100%;
+  height: auto !important;
+  position: relative;
+}
+
+/* DatePicker Input */
+.datepickerWrapper :global(.react-datepicker__input-container input) {
+  width: 100%;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2rem;
+  box-sizing: border-box;
+  @apply text-sm rounded-md border border-gray-300 
+         focus:outline-none  focus:border-blue-500
+         bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600
+         transition-colors duration-200;
+}
+
+/* Calendar icon positioning and styling */
+.datepickerWrapper :global(.react-datepicker__calendar-icon) {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: #6B7280; /* gray-500 */
+  pointer-events: none;
+}
+
+/* Dark mode for calendar icon */
+.datepickerWrapper.dark :global(.react-datepicker__calendar-icon) {
+  fill: #9CA3AF; /* gray-400 for dark mode */
+}
+
+/* DatePicker Calendar Container */
+.datepickerWrapper :global(.react-datepicker) {
+  @apply font-nunito border border-gray-200 rounded-lg shadow-lg bg-white dark:bg-gray-800 
+         dark:border-gray-700 text-gray-700 dark:text-gray-200;
+}
+
+/* Header */
+.datepickerWrapper :global(.react-datepicker__header) {
+  @apply bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 rounded-t-lg;
+}
+
+/* Month container */
+.datepickerWrapper :global(.react-datepicker__month-container) {
+  @apply p-2;
+}
+
+/* Day names */
+.datepickerWrapper :global(.react-datepicker__day-name) {
+  @apply text-gray-500 dark:text-gray-400 font-medium text-xs mx-1 w-8 h-8 flex items-center justify-center;
+}
+
+/* Days */
+.datepickerWrapper :global(.react-datepicker__day) {
+  @apply mx-1 rounded-full w-8 h-8 flex items-center justify-center text-sm
+         hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors;
+}
+
+/* Selected day */
+.datepickerWrapper :global(.react-datepicker__day--selected) {
+  @apply bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700;
+}
+
+/* Today */
+.datepickerWrapper :global(.react-datepicker__day--today) {
+  @apply font-bold border border-blue-300 dark:border-blue-700;
+}
+
+/* Month and year selectors */
+.datepickerWrapper :global(.react-datepicker__month-select),
+.datepickerWrapper :global(.react-datepicker__year-select) {
+  @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 
+         rounded-md py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Month in year view */
+.datepickerWrapper :global(.react-datepicker__month-text) {
+  @apply py-2 px-3 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors;
+}
+
+.datepickerWrapper :global(.react-datepicker__month--selected) {
+  @apply bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700;
+}
+
+/* Year in decade view */
+.datepickerWrapper :global(.react-datepicker__year-text) {
+  @apply py-2 px-3 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors;
+}
+
+.datepickerWrapper :global(.react-datepicker__year-text--selected) {
+  @apply bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700;
+}
+
+/* Navigation */
+.datepickerWrapper :global(.react-datepicker__navigation) {
+  @apply top-3;
+}
+
+/* Clear button - completely redesigned */
+.datepickerWrapper :global(.react-datepicker__close-icon) {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.datepickerWrapper :global(.react-datepicker__close-icon::after) {
+  @apply bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300;
+  font-size: 16px;
+  height: 20px;
+  width: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.datepickerWrapper :global(.react-datepicker__close-icon:hover::after) {
+  @apply bg-gray-300 text-gray-800 dark:bg-gray-600 dark:text-white;
+}
+
+/* Text alignment in input */
+.datepickerInput {
+  text-align: left;
+}
+
+/* Fix for when both icons are present */
+.datepickerWrapper :global(.react-datepicker__input-container--has-icon) .datepickerInput {
+  text-indent: 8px; 
+} 
+.react-datepicker__calendar-icon {
+    position: absolute;
+    left: 0.75rem; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    fill: gray;
+  }
