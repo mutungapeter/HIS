@@ -115,6 +115,7 @@ class ListClientAPIView(generics.ListAPIView):
 
 
 class MetricsView(APIView):
+    permission_classes = [IsAuthenticated]
     """
     API view providing comprehensive metrics data with filtering 
     """
