@@ -17,32 +17,29 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDeleteClietEnrollmentMutation } from "@/redux/services/enrollments/enrollments";
 import ActionModal from "@/components/common/Modals/ActionModal";
+import { EnrollmentType } from "@/lib/definitions/enrollments";
 
 const ClientDetails = ({ client_id }: { client_id: string }) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedEnrolledProgram, setSelectedEnrolledProgram] = useState<number | null>(null);
   const { data, isLoading, error, refetch } = useGetClientDetailsQuery(client_id,{ refetchOnMountOrArgChange: true } );
     const [deleteClietEnrollment, {isLoading:isDeleting}]=useDeleteClietEnrollmentMutation()
-  const columns: Column<ProgramType>[] = [
+
+    console.log("data", data)
+  const columns: Column<EnrollmentType>[] = [
     {
       header: "Program",
-      accessor: "name",
-      cell: (data: ProgramType) => (
-        <span className="text-sm font-semibold ">{data.name}</span>
+      accessor: "program",
+      cell: (data: EnrollmentType) => (
+        <span className="text-sm font-semibold ">{data.program}</span>
       ),
     },
 
-    {
-      header: "Description",
-      accessor: "description",
-      cell: (data: ProgramType) => (
-        <span className="text-sm ">{data.description}</span>
-      ),
-    },
+    
     {
       header: "Enrolled on",
       accessor: "created_at",
-      cell: (data: ProgramType) => (
+      cell: (data: EnrollmentType) => (
         <span className="text-sm font-medium">
           {CustomDate(data.created_at)}
         </span>
@@ -51,7 +48,7 @@ const ClientDetails = ({ client_id }: { client_id: string }) => {
     {
       header: "Actions",
       accessor: "id",
-      cell: (data: ProgramType) => (
+      cell: (data: EnrollmentType) => (
         <div className="flex items-center  text-center space-x-2">
           <div
             onClick={() => openDeleteModal(data.id)}
@@ -180,10 +177,7 @@ const ClientDetails = ({ client_id }: { client_id: string }) => {
                     {CustomDate(data.date_of_birth)}
                   </p>
                 </div>
-                {/* <div>
-              <p className="text-xs font-medium text-gray-500">Age</p>
-              <p className="text-sm font-medium text-gray-800 mt-1">{calculateAge(data.date_of_birth)} years</p>
-            </div> */}
+               
                 <div>
                   <p className="text-xs font-medium text-gray-500">
                     Phone Number
@@ -212,9 +206,9 @@ const ClientDetails = ({ client_id }: { client_id: string }) => {
               </p>
             </div>
 
-            {data.enrolled_programs.length > 0 ? (
+            {data?.enrollments.length > 0 ? (
               <DataTable
-                data={data?.enrolled_programs}
+                data={data?.enrollments}
                 columns={columns}
                 isLoading={isLoading}
                 error={error}
