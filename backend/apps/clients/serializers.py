@@ -1,17 +1,19 @@
 
 from apps.health_programs.models import HealthProgram
 from apps.health_programs.serializers import HealthProgramSerializer
+from apps.enrollments.serializers import EnrollmentSerializer
 from rest_framework import serializers
 from .models import Client
 
 class ClientSerializer(serializers.ModelSerializer):
-    enrolled_programs = serializers.SerializerMethodField()
+    enrollments = serializers.SerializerMethodField()
     class Meta:
         model = Client
         fields = "__all__"
-    def get_enrolled_programs(self, obj):
-        programs = HealthProgram.objects.filter(enrollment__client=obj)
-        return HealthProgramSerializer(programs, many=True).data
+    def get_enrollments(self, obj):
+        enrollments = obj.enrollments.select_related('program').all()
+        return EnrollmentSerializer(enrollments, many=True).data
+
 
 
 class ClientCreateUpdateSerializer(serializers.ModelSerializer):
