@@ -4,20 +4,19 @@ import { useGetClientDetailsQuery } from "@/redux/services/clients/clients";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import {
-    LuInfo,
-    LuPhone,
-    LuUser
+  LuInfo,
+  LuPhone,
+  LuUser
 } from "react-icons/lu";
 
+import ActionModal from "@/components/common/Modals/ActionModal";
 import ContentSpinner from "@/components/common/spinners/dataLoadingSpinner";
 import DataTable, { Column } from "@/components/common/Table/DataTable";
-import { ProgramType } from "@/lib/definitions/programs";
-import { FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { useDeleteClietEnrollmentMutation } from "@/redux/services/enrollments/enrollments";
-import ActionModal from "@/components/common/Modals/ActionModal";
 import { EnrollmentType } from "@/lib/definitions/enrollments";
+import { useDeleteClietEnrollmentMutation } from "@/redux/services/enrollments/enrollments";
+import { useState } from "react";
+import { FiTrash2 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const ClientDetails = ({ client_id }: { client_id: string }) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
