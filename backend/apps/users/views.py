@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
-    
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -46,6 +46,8 @@ class RegisterUserAPIView(generics.CreateAPIView):
 
 class UserLoginAPIView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+    permission_classes = [AllowAny]
+
 
 
 class UserLogoutAPIView(APIView):
