@@ -62,16 +62,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-# CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
 
     cors_origins_env = os.getenv("CORS_ALLOWED_ORIGINS", "")
     CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
-    # backend_domain = "https://health-information-system-backend.onrender.com"
-    # if backend_domain not in CORS_ALLOWED_ORIGINS:
-    #     CORS_ALLOWED_ORIGINS.append(backend_domain)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CORS_ALLOW_METHODS = [
     'GET',

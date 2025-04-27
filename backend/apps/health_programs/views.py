@@ -7,7 +7,7 @@ from .serializers import HealthProgramCreateUpdateSerializer, HealthProgramSeria
 from .filters import HealthProgramFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import ValidationError
-
+from rest_framework.views import APIView
 class CreateHealthProgramAPIView(generics.CreateAPIView):
     queryset = HealthProgram.objects.all()
     serializer_class = HealthProgramCreateUpdateSerializer
@@ -74,3 +74,17 @@ class ListHealthProgramAPIView(generics.ListAPIView):
 
         serializer = self.serializer_class(programs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+"""Backend health check ,to confirm the backend is up and running"""
+class HealthCheckAPIView(APIView):
+    """
+    Basic health check endpoint that returns a 200 OK response
+    with a success message.
+    """
+    def get(self, request, *args, **kwargs):
+        data = {
+            "status": "ok",
+            "message": "Health Information System API is running"
+        }
+        return Response(data, status=status.HTTP_200_OK)
