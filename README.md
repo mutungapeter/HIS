@@ -32,6 +32,16 @@ A comprehensive health information system for managing clients and health progra
 - **Frontend**: [https://health-informantion-system.vercel.app/](https://health-informantion-system.vercel.app/)
 - **Backend API Documentation**: [https://health-information-system-backend.onrender.com/api/swagger/](https://health-information-system-backend.onrender.com/api/swagger/)
 
+## Screenshots
+![Home](screenshots/Screenshot_6.png)
+![Register](screenshots/Screenshot_5.png)
+![Login](screenshots/Screenshot_4.png)
+![Dashboard](screenshots/Screenshot_3.png)
+![Programs](screenshots/Screenshot_2.png)
+![CreateProgram](screenshots/Screenshot_1.png)
+
+These screenshots provide a glimpse of the system's interface. For a complete experience and to appreciate all features
+
 ## Project Structure
 
 The project follows a modular structure with the following apps:
@@ -209,3 +219,4 @@ MIT License
 Peter Mutunga - [mutungapetrah@gmail.com]
 
 Github repo link: [https://github.com/mutungapeter/HIS.git](https://github.com/mutungapeter/HIS.git)
+
