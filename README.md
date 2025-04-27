@@ -206,6 +206,6 @@ MIT License
 
 ## Contact
 
-Peter Mutunga - [mutungapeter@example.com]
+Peter Mutunga - [mutungapetrah@gmail.com]
 
 Github repo link: [https://github.com/mutungapeter/HIS.git](https://github.com/mutungapeter/HIS.git)
