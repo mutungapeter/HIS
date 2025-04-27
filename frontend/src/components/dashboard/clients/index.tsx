@@ -6,23 +6,26 @@ import { useFilters } from "@/hooks/useFilters";
 import { ClientType } from "@/lib/definitions/clients";
 import { PAGE_SIZE } from "@/lib/utils/constants";
 import { CustomDate } from "@/lib/utils/dates";
-import { useGetClientsQuery } from "@/redux/services/clients/clients";
+import { useDeleteClientMutation, useGetClientsQuery } from "@/redux/services/clients/clients";
 import Link from "next/link";
 
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
-import { FiEye } from "react-icons/fi";
+import { useMemo, useState } from "react";
+import { FiEye, FiTrash2 } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 import EnrollClient from "../enrollments/enrollClient";
 import EditClient from "./EditClient";
 import AddClient from "./NewClient";
+import { toast } from "react-toastify";
+import ActionModal from "@/components/common/Modals/ActionModal";
 
 
 const Clients = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+      const [selectedClient, setSelectedClient] = useState<number | null>(null);
   const { filters, currentPage, handleFilterChange, handlePageChange } =
     useFilters({
       initialFilters: {
@@ -43,9 +46,39 @@ const Clients = () => {
     [currentPage, filters]
   );
   const { data, isLoading, error, refetch } = useGetClientsQuery(queryParams,{ refetchOnMountOrArgChange: true });
-
-  console.log("data", data);
-  
+  const [deleteClient,{isLoading:isDeleting}] = useDeleteClientMutation();
+  // console.log("data", data);
+  const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setSelectedClient(null);
+        
+      };
+    
+     
+    
+      const openDeleteModal = (program: number) => {
+        setSelectedClient(program);
+        setIsDeleteModalOpen(true);
+      };
+      const handleDeleteClient = async () => {
+        try {
+          await deleteClient(selectedClient).unwrap();
+          toast.success("Client deleted successfully!");
+          closeDeleteModal();
+          refetch();
+        } catch (error: unknown) {
+          console.log("error", error);
+          if (error && typeof error === "object" && "data" in error && error.data) {
+            const errorData = (error as { data: { error: string } }).data;
+            console.log("errorData", errorData);
+            toast.error(errorData.error || "Failed to delete client. Please try again.");
+            closeDeleteModal();
+          } else {
+            toast.error("Unexpected error occurred. Please try again.");
+            closeDeleteModal();
+          }
+        }
+      };
   const columns: Column<ClientType>[] = [
     {
       header: "Name",
@@ -101,13 +134,13 @@ const Clients = () => {
       cell: (data: ClientType) => (
         <div className="flex items-center justify-center space-x-2">
           <EnrollClient client={data} refetchData={refetch} />
-          {/* <div
-            onClick={() => openDeleteModal(booking.id)}
+          <div
+            onClick={() => openDeleteModal(data.id)}
             className="p-2 rounded-xl bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 cursor-pointer transition duration-200 shadow-sm"
-            title="Delete Property"
+            title="Delete client"
           >
             <FiTrash2 className="text-sm" />
-          </div> */}
+          </div>
           
           
           <EditClient client={data} refetchData={refetch} />
@@ -149,15 +182,17 @@ const Clients = () => {
         </div>
         
       </div>
-      {/* <DeleteConfirmationModal
+      <ActionModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        onDelete={handleDeleteBooking}
+        onDelete={handleDeleteClient}
         isDeleting={isDeleting}
-        confirmationMessage="Are you sure you want to delete this Booking ?"
+        confirmationMessage="Are you sure you want to delete this client from the system ?"
         deleteMessage="This action cannot be undone."
+        title="Delete Client"
+        actionText="Delete"
        
-      /> */}
+      />
       <DataTable
         data={data?.results}
         columns={columns}

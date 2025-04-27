@@ -191,7 +191,7 @@ const NewProgram = ({ refetchData }: { refetchData: () => void }) => {
                           <span>Adding...</span>
                         </span>
                       ) : (
-                        <span>Add Client</span>
+                        <span>Add Program</span>
                       )}
                     </button>
                   </div>

@@ -91,5 +91,6 @@ export const {
   useNewClientMutation,
   useUpdateClientMutation,
   useGetClientDetailsQuery,
-  useGetMetricsQuery
+  useGetMetricsQuery,
+  useDeleteClientMutation
 } = clientsApi;
