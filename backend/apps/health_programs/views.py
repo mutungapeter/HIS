@@ -8,6 +8,7 @@ from .filters import HealthProgramFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 class CreateHealthProgramAPIView(generics.CreateAPIView):
     queryset = HealthProgram.objects.all()
     serializer_class = HealthProgramCreateUpdateSerializer
@@ -82,6 +83,7 @@ class HealthCheckAPIView(APIView):
     Basic health check endpoint that returns a 200 OK response
     with a success message.
     """
+    permission_classes = [AllowAny] 
     def get(self, request, *args, **kwargs):
         data = {
             "status": "ok",
