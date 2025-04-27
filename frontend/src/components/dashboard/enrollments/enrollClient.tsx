@@ -86,7 +86,7 @@ const EnrollClient = ({ client, refetchData }: { client: ClientType; refetchData
         const errorData = (error as { data: { error: string } }).data;
         console.log("errorData", errorData);
 
-        setSuccessMessage("Failed to enroll client.");
+        setSuccessMessage("Client already enrolled to this program or one of the selected programs");
         setShowSuccessModal(true);
       } else {
         setIsError(true);

@@ -16,8 +16,8 @@ const SuccessFailModal = ({
         className="fixed inset-0 bg-black bg-opacity-30"
       ></div>
       <div
-        className="bg-white min-h-[45vh]  rounded-lg shadow-xl p-6
-       md:max-w-c-550 max-w-c-300 w-full z-50 flex flex-col transform scale-100 animate-fadeIn "
+        className="bg-white min-h-[45vh]  rounded-lg shadow-xl p-6 px-3
+       md:max-w-c-550 max-w-c-550 w-full z-50 flex flex-col transform scale-100 animate-fadeIn "
       >
         <div className="flex flex-col  items-center justify-center ">
           <div
@@ -25,9 +25,9 @@ const SuccessFailModal = ({
             ${isError ? "border border-red-300" : "border border-success-300"}`}
           >
             {isError ? (
-              <MdOutlineClose className="text-red-500 text-xl md:text-4xl" />
+              <MdOutlineClose className="text-red-500 text-xl md:text-2xl" />
             ) : (
-              <MdOutlineCheck className="text-success-500 text-xl md:text-4xl" />
+              <MdOutlineCheck className="text-success-500 text-xl md:text-2xl" />
             )}
           </div>
           <div className="flex flex-col gap-4 items-center justify-center text-center">
